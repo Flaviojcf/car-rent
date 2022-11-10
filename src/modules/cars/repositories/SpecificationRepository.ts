@@ -5,11 +5,12 @@ import {
 } from "./ISpecificationRepository";
 
 export class SpecificationRepository implements ISpecificationRepository {
-  private specification: Specification[];
+  private specifications: Specification[];
 
   constructor() {
-    this.specification = [];
+    this.specifications = [];
   }
+
   create({ description, name }: ICreateSpecificationDTO): void {
     const specification = new Specification();
 
@@ -19,6 +20,12 @@ export class SpecificationRepository implements ISpecificationRepository {
       created_at: new Date(),
     });
 
-    this.specification.push(specification);
+    this.specifications.push(specification);
+  }
+  findByName(name: string): Specification {
+    const specification = this.specifications.find(
+      (specification) => specification.name === name
+    );
+    return specification
   }
 }
