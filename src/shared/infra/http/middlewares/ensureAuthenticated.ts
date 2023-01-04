@@ -1,5 +1,6 @@
-import { AppError } from "./../errors/AppError";
-import UsersRepository from "../modules/accounts/repositories/implementations/UsersRepository";
+
+import { AppError } from "@shared/errors/AppError";
+import { UsersRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UsersRepositoryInMemory";
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
@@ -26,7 +27,7 @@ export async function ensureAuthenticated(
       "6e7b2ce2952496d9a8968259e8c2a3d4"
     ) as IPayLoad;
 
-    const usersRepository = new UsersRepository();
+    const usersRepository = new UsersRepositoryInMemory();
     const user = usersRepository.findById(user_id);
 
     if (!user) {

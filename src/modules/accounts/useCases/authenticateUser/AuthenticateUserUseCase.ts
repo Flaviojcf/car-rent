@@ -1,6 +1,6 @@
-import { AppError } from './../../../../errors/AppError';
-import { IUsersRepository } from "./../../repositories/IUsersRepository";
+import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 
@@ -27,13 +27,12 @@ export class AuthenticateUserUseCase {
   async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.userRepository.findByEmail(email);
 
-
     if (!user) {
       throw new AppError("Email or password incorrect");
     }
     const passwordMatch = await compare(password, user.password);
-    console.log(password)
-    console.log(user.password)
+    console.log(password);
+    console.log(user.password);
 
     if (!passwordMatch) {
       throw new AppError("Email or password incorrect");
