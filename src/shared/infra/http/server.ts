@@ -1,4 +1,4 @@
-
+import "reflect-metadata";
 import { AppError } from "@shared/errors/AppError";
 import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors";

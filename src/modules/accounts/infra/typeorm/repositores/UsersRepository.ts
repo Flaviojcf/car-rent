@@ -1,10 +1,9 @@
-import { ICreateUsersDTO } from "@modules/accounts/dtos/ICreateUserDTO";
-import { User } from "@modules/accounts/infra/typeorm/entities/User";
-import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { getRepository, Repository } from "typeorm";
+import { ICreateUsersDTO } from "@modules/accounts/dtos/ICreateUserDTO";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { User } from "../entities/User";
 
-
-export default class UsersRepository implements IUsersRepository {
+export class UsersRepository implements IUsersRepository {
   private repository: Repository<User>;
 
   constructor() {
@@ -27,6 +26,7 @@ export default class UsersRepository implements IUsersRepository {
       avatar,
       id,
     });
+
     await this.repository.save(user);
   }
 
@@ -40,3 +40,5 @@ export default class UsersRepository implements IUsersRepository {
     return user;
   }
 }
+
+
